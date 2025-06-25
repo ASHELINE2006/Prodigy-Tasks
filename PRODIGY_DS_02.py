@@ -1,0 +1,30 @@
+import pandas as pd 
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+details = pd.read_csv('train.csv')
+print(details)
+details.shape
+details.info()
+details.describe()
+details.columns.tolist()
+details.isnull().sum()
+details.dropna(subset=["Embarked"], inplace=True)
+details.fillna({'Cabin':'Unknown'}, inplace = True)
+details.fillna({'Age':details['Age'].mean()}, inplace=True)
+details.isnull().sum()
+details.nunique()
+details.duplicated().sum()
+plt.figure(figsize = (10,5))
+plt.hist(details['Age'],color='pink',edgecolor='black',align='mid')
+plt.xlabel('Age of Passenger')
+plt.ylabel('Frequency')
+plt.title('Age Distribution')
+plt.show()
+plt.figure(figsize=(10,5))
+plt.scatter(details['Age'],details['Fare'],color='green')
+plt.xlabel('Age of Passenger')
+plt.ylabel('Fare')
+plt.title('Age vs Fare')
+plt.show()
+sns.pairplot(details,kind='kde',diag_kind='hist')
